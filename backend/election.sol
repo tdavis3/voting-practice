@@ -1,5 +1,6 @@
 pragma solidity ^0.7.6;
 
+
 contract ElectionFactory {
 
   /// @notice Create an election
@@ -13,6 +14,7 @@ contract ElectionFactory {
   }
 
 }
+
 
 /// @notice This class represents a standalone election
 contract Election {
@@ -68,6 +70,12 @@ contract Election {
   /// @notice Get all registered candidates
   function getCandidates() external view returns (address[] memory) {
     return candidates;
+  }
+
+  /// @notice Get vote count for a candidate
+  function getVoteCount(address candidate) external view returns (uint) {
+    require(votes[candidate] == -1 || votes[candidate] > 0, 'Candidate does not exist.');
+    return votes[candidate] == -1 ? 0 : votes[candidate];
   }
 
 }
